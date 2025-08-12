@@ -6,8 +6,8 @@
       "run": ".github/classroom/check.sh",
       "timeout": 10,
       "points": 12,
-      "comparison": "contains",
-      "output": "Score"
+      "comparison": "regex",
+      "output": "Score:\\s*\\d+/12"
     }
   ]
 }
