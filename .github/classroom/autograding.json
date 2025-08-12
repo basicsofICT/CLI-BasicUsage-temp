@@ -7,7 +7,7 @@
       "timeout": 10,
       "points": 12,
       "comparison": "contains",
-      "output": ""
+      "output": "Score"
     }
   ]
 }
