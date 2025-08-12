@@ -4,14 +4,16 @@
 
 - Follow each section in order 
 
-- The autograder checks **exact filenames and locations**, so type the commands as asked.
+- You are able to check your score on your own. 
+
+- Remember to frequently commit and push the changes (No. 15 )
 
 ---
 
 ***Do not edit check.sh or .github/classroom/autograding.json.***
 
 ***Good luck 🚀***
-## 📂 1. Create the project folders
+## 1. Create the project folders
 
 ```bash
 # Make main project folder with two sub-folders: src & docs
@@ -20,7 +22,7 @@
 
 ---
 
-## ✅ Task 2 — Create an executable shell script `hello.sh` in `project/src`
+## 2. Create an executable shell script `hello.sh` in `project/src`
 ```bash
 cat > project/src/hello.sh <<'SH'
 #!/usr/bin/env bash
@@ -31,7 +33,7 @@ chmod +x project/src/hello.sh
 
 ---
 
-## ✅ Task 3. Create readme.txt inside project/src (Use Nano text editor)
+##  3. Create readme.txt inside project/src (Use Nano text editor)
 
 ```bash
 Type any three (or more) lines in the file, e.g.:
@@ -42,14 +44,14 @@ Line 3
 ```
 ---
 
-## ✅ Task 4 — Move `readme.txt` to `project/docs`
+## 4. Move `readme.txt` to `project/docs`
 
 ```bash
 Move the readme.txt file from its current location to project/docs folder
 ```
 ---
 
-## ✅ Task 5 — Build report.txt
+## 5. Build report.txt
 
 In the project/docs folder create a file named report.txt using redirect. 
 
@@ -64,31 +66,31 @@ Append the text: Task completed
 
 ---
 
-## ✅ Task 6 — Back up the `src` folder to `src_backup`
+## 6. Back up the `src` folder to `src_backup`
 ```bash
 In the project folder, create a new folder called src_backup and use cp command to create the copy of the src folder
 ```
 
 ---
 
-## ✅ Task 7 — Remove any `project/bin` folder if it exists
+## 7. Remove any `project/bin` folder if it exists
 
 
 ---
 
-## ✅ Task 8 — Create a hidden file `.secret` in `project/` folder.
+## 8. Create a hidden file `.secret` in `project/` folder.
 
 
 ---
 
-## ✅ Task 9 — Record permissions of `hello.sh` into `mode.txt`
+## 9. Record permissions of `hello.sh` into `mode.txt`
 ```bash
 stat -c "%a" project/src/hello.sh > project/docs/mode.txt
 ```
 
 ---
 
-## ✅ Task 10 — Wildcards: create sample files and list matches to `wild.txt`
+## 10. Wildcards: create sample files and list matches to `wild.txt`
 ```bash
 touch project/src/a1.txt project/src/a2.txt project/src/b1.log project/src/ab.txt
 ls project/src/a*.txt > project/docs/wild.txt
@@ -96,7 +98,7 @@ ls project/src/a*.txt > project/docs/wild.txt
 
 ---
 
-## ✅ Task 11 — Download a text file and count exact “Linux” occurrences
+## 11. Download a text file and count exact “Linux” occurrences
 ```bash
 wget -q -O project/src/hello.txt https://raw.githubusercontent.com/dipaish/cimages/main/hello.txt
 grep -o 'Linux' project/src/hello.txt | wc -l > project/docs/linux_count.txt
@@ -104,34 +106,40 @@ grep -o 'Linux' project/src/hello.txt | wc -l > project/docs/linux_count.txt
 
 ---
 
-## ✅ Task 12 — Pipes: save first 5 lines of `/etc` long listing
+## 12. Pipes: save first 5 lines of `/etc` long listing into a file project/docs/etc_head.txt
 ```bash
-ls -l /etc | head -n 5 > project/docs/etc_head.txt
+# hint use ls-l and head with pipe and then redirect
 ```
 
 ---
 
-## ✅ Task 13 — Help output: capture first line of `date --help`
+## 13.  Help output: capture first line of `date --help`
 ```bash
-date --help | head -n 1 > project/docs/date_help.txt
+# similar approach to 12 but use help command for the help output & redirect
 ```
 
 ---
 
-## ✅ Task 14 — Calculator: run a bc expression and save result
+## 14. Run the check.sh script and know your score
 ```bash
-printf "34+45\nquit\n" | bc > project/docs/calc.txt
+.github/classroom/check.sh > result.txt
+
+# After you have run the above command, you can check your score by typing 
+
+cat result.txt 
+
 ```
 
----
+>> Note 
 
-## 🚀 Commit and push
+- If you’re not satisfied with your score, you may correct any mistakes you’ve made. You can try as many times as you like before the deadline. The score you have at the deadline will be your final score. I will check it from your repository and post it in Canvas. 
+- After making the corrections, **re-run Task 14** again and check your score. 
+- **Always remember to commit and push the changes you have made by doing the Task no. 15 before closing the GitHub Codespace. You need to do this frequently that is every time you work on the tasks, remember to commit and push**
+
+
+## 15. 🚀 Commit and push
 ```bash
 git add .
-git commit -m "Complete 15 CLI tasks (no Python)"
+git commit -m "Complete 15 CLI tasks"
 git push
 ```
-
-
->> **Done! Push triggers the autograder.**
-You’ll see results in the Classroom dashboard within a minute or two.

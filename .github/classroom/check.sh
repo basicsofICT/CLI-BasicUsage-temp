@@ -157,18 +157,6 @@ else
   bad "Task 13: project/docs/date_help.txt missing"
 fi
 
-# -- Task 14: calc.txt contains result of 34+45 (79)
-if [ -f "project/docs/calc.txt" ]; then
-  got14="$(tr -d '[:space:]' < project/docs/calc.txt)"
-  if [ "$got14" = "79" ]; then
-    ok "Task 14: calc.txt contains 79"
-  else
-    bad "Task 14: calc.txt content incorrect (got '$got14', expected '79')"
-  fi
-else
-  bad "Task 14: project/docs/calc.txt missing"
-fi
-
-echo "Score: $score/14"
+echo "Score: $score/13"
 
 exit 0
