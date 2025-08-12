@@ -1,13 +1,60 @@
 {
   "tests": [
     {
-      "name": "Linux CLI Practical",
-      "setup": "chmod +x .github/classroom/check.sh",
-      "run": ".github/classroom/check.sh",
-      "timeout": 10,
-      "points": 12,
+      "name": "Project tree exists (project/src and project/docs)",
+      "run": "bash -lc '[ -d project/src ] && [ -d project/docs ]'",
+      "timeout": 5,
+      "points": 1,
       "comparison": "regex",
-      "output": "Score:\\s*\\d+/12"
+      "output": ".*"
+    },
+    {
+      "name": "main.py executable and prints Hello CLI",
+      "run": "bash -lc '[ -x project/src/main.py ] && out=$(project/src/main.py 2>/dev/null) && [ \"$out\" = \"Hello CLI\" ]'",
+      "timeout": 5,
+      "points": 3,
+      "comparison": "regex",
+      "output": ".*"
+    },
+    {
+      "name": "readme.txt moved to docs and has ≥ 3 lines",
+      "run": "bash -lc '[ -f project/docs/readme.txt ] && [ $(wc -l < project/docs/readme.txt) -ge 3 ]'",
+      "timeout": 5,
+      "points": 2,
+      "comparison": "regex",
+      "output": ".*"
+    },
+    {
+      "name": "report.txt has 11 lines and ends with Task completed",
+      "run": "bash -lc '[ -f project/docs/report.txt ] && [ $(wc -l < project/docs/report.txt) -eq 11 ] && [ \"$(tail -n1 project/docs/report.txt)\" = \"Task completed\" ]'",
+      "timeout": 5,
+      "points": 2,
+      "comparison": "regex",
+      "output": ".*"
+    },
+    {
+      "name": "src_backup matches src",
+      "run": "bash -lc '[ -d project/src_backup ] && diff -qr project/src project/src_backup >/dev/null'",
+      "timeout": 5,
+      "points": 2,
+      "comparison": "regex",
+      "output": ".*"
+    },
+    {
+      "name": "project/bin does not exist",
+      "run": "bash -lc '[ ! -d project/bin ]'",
+      "timeout": 5,
+      "points": 1,
+      "comparison": "regex",
+      "output": ".*"
+    },
+    {
+      "name": ".secret contains exact text",
+      "run": "bash -lc '[ -f project/.secret ] && grep -qx \"top secret\" project/.secret'",
+      "timeout": 5,
+      "points": 1,
+      "comparison": "regex",
+      "output": ".*"
     }
   ]
 }
