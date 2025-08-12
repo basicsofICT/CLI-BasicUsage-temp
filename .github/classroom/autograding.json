@@ -1,9 +1,9 @@
-
 {
   "tests": [
     {
       "name": "Linux CLI Practical",
-      "run": "bash check.sh",
+      "setup": "chmod +x .github/classroom/check.sh",
+      "run": ".github/classroom/check.sh",
       "timeout": 10,
       "points": 12,
       "comparison": "contains",
