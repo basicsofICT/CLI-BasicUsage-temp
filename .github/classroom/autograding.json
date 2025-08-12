@@ -1,0 +1,13 @@
+
+{
+  "tests": [
+    {
+      "name": "Linux CLI Practical",
+      "run": "bash check.sh",
+      "timeout": 10,
+      "points": 12,
+      "comparison": "contains",
+      "output": ""
+    }
+  ]
+}
