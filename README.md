@@ -2,6 +2,8 @@
 
 - Work **in a GitHub Codespace**. This repo is pinned to **Ubuntu 24.04 (Noble)** so everyone uses the same environment.
 
+- First study [Command Line Basics](01-command-line-basics.md) properly. I recommend completing all the tasks from the learning materials in the same environment to become familiar with the command line before attempting the practical exercises below.
+
 - Follow each section in order (Not necessary but there are some tasks which you might need to do in order)
 
 - You can check your score yourself. You will earn 13 points from the tasks, plus 2 points for running the score-checking script and pushing your changes to your repository.
