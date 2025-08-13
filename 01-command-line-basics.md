@@ -12,7 +12,7 @@ This guide introduces you to essential Linux commands in an Ubuntu environment u
 
 - Work with command history and help
 
-- Use the nano text editor and built-in calculator
+- Use the nano text editor
 
 - Understand file permissions and ownership
 
@@ -375,7 +375,7 @@ ls -l report.txt
 
 Try to complete these tasks using what you’ve learned: (No Submission required)
 
-1. Create a directory `project` and inside it, `src`, `bin`, and `docs`.
+1. Create a directory `myFolder` and inside it, `src`, `bin`, and `docs`.
 2. Create files like `main.py`, `readme.txt` in `src`.
 3. Move `readme.txt` to `docs`.
 4. Copy `src` to a new folder `src_backup`.
@@ -393,7 +393,7 @@ You’ve now learned how to:
 * Create, move, rename, and delete files and folders
 * Use redirection, wildcards, and pipes
 * Use command history and help tools
-* Use `nano` and `bc` for editing and calculations
+* Use `nano` for editing text files
 * Understand permissions and change file ownership
 * Explore the Linux file system hierarchy
 

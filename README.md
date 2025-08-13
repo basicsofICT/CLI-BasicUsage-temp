@@ -2,11 +2,11 @@
 
 - Work **in a GitHub Codespace**. This repo is pinned to **Ubuntu 24.04 (Noble)** so everyone uses the same environment.
 
-- Follow each section in order 
+- Follow each section in order (Not necessary but there are some tasks which you might need to do in order)
 
-- You are able to check your score on your own. 
+- You can check your score yourself. You will earn 13 points from the tasks, plus 2 points for running the score-checking script and pushing your changes to your repository.
 
-- Remember to frequently commit and push the changes (No. 15 )
+- Remember to frequently commit and push the changes [15. 🚀 Commit and push](#15--commit-and-push)
 
 ---
 
