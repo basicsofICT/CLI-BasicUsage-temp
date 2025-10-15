@@ -46,10 +46,10 @@ Line 3
 ```
 ---
 
-## 4. Move `readme.txt` to `project/docs`
+## 4. Copy `readme.txt` to `project/docs`
 
 ```bash
-Move the readme.txt file from its current location to project/docs folder
+Copy the readme.txt file from its current location to project/docs folder, use cp command
 ```
 ---
 
