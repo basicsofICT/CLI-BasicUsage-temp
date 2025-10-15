@@ -57,7 +57,8 @@ Move the readme.txt file from its current location to project/docs folder
 
 In the project/docs folder create a file named report.txt using redirect. 
 
-> Hint: Use ls -l and head command to get the first 10 file names from ```/usr/bin ls -1 /usr/bin | head -n 10``` 
+> Hint: Use ls and head command to get the first 10 file names from ```/usr/bin ls  /usr/bin | head -n 10```.
+> Hint: Use echo "Task completed" and redirect for appending the text as asked below. 
 
 ```bash
 Write the first 10 filenames from /usr/bin
@@ -115,9 +116,9 @@ grep -o 'Linux' project/src/hello.txt | wc -l > project/docs/linux_count.txt
 
 ---
 
-## 13.  Help output: capture first line of `date --help`
+## 13.  Help output: capture first line of `date --help` command in the file project/docs/date_help.txt
 ```bash
-# similar approach to 12 but use help command for the help output & redirect
+# similar approach to 12 but use help command for the help output & redirect the output to project/docs/date_help.txt
 ```
 
 ---
