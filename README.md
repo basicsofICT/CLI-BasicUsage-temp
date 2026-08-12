@@ -10,8 +10,6 @@
 
 - You can check your score yourself. You will earn 13 points from the tasks, plus 2 points for running the score-checking script and pushing your changes to your repository.
 
-- You can repeatedly do these tasks as many times as you want and can also attempt optional extended tasks for additional learning.
-
 - Remember to frequently commit and push the changes [15. 🚀 Commit and push](#15--commit-and-push)
 
 ---
@@ -182,6 +180,8 @@ git push
 ## 16. Optional Extended Workload (Not part of the 15-point score)
 
 Complete the following extra tasks to deepen your CLI skills. These are recommended for extra practice.
+
+You can repeatedly do these tasks as many times as you want and can also attempt optional extended tasks for additional learning.
 
 The `check.sh` script now also reports these extended checks separately as an extended score.
 

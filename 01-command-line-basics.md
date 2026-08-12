@@ -76,7 +76,7 @@ Quick Ubuntu doc workflow:
 2. If you need Ubuntu-specific behavior, check the Ubuntu docs links above.
 3. If a command is missing, use Ubuntu Package Search to find which package provides it.
 
-### 🧭 Ubuntu 24.04 Quick Tips (Codespaces-Friendly)
+### 🧭 Ubuntu 24.04 Quick Tips (Optional Tasks)
 
 Use these commands often when working in Ubuntu 24.04:
 
@@ -443,7 +443,7 @@ wc -w names.txt                         # Count words
 
 ---
 
-## 18. 🧪 Practice Drills (Heavier Workload)
+## 18. 🧪 Practice Drills (Optional Tasks)
 
 Try these mini-challenges in order:
 
