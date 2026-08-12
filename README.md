@@ -2,8 +2,6 @@
 
 - Start by **forking this repository** to your own GitHub account.
 
-- **GitHub Classroom is not required** for this assignment.
-
 - Work **in a GitHub Codespace created from your fork**. This repo is pinned to **Ubuntu 24.04 (Noble)** so everyone uses the same environment.
 
 - First study [Command Line Basics](01-command-line-basics.md) properly. I recommend completing all the tasks from the learning materials in the same environment to become familiar with the command line before attempting the practical exercises below.
@@ -12,7 +10,7 @@
 
 - You can check your score yourself. You will earn 13 points from the tasks, plus 2 points for running the score-checking script and pushing your changes to your repository.
 
-- To make the workload heavier, complete the optional extended tasks at the end after Task 15.
+- You can repeatedly do these tasks as many times as you want and can also attempt optional extended tasks for additional learning.
 
 - Remember to frequently commit and push the changes [15. 🚀 Commit and push](#15--commit-and-push)
 
