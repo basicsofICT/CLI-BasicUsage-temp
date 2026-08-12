@@ -61,10 +61,10 @@ Line 3
 ```
 ---
 
-## 4. Move `readme.txt` to `project/docs`
+## 4. Copy `readme.txt` to `project/docs`
 
 ```bash
-mv project/src/readme.txt project/docs/
+cp project/src/readme.txt project/docs/
 ```
 ---
 
@@ -73,6 +73,8 @@ mv project/src/readme.txt project/docs/
 In the project/docs folder, create a file named report.txt using redirection.
 
 > Hint: Use the `ls -1 /usr/bin | head -n 10` command to get the first 10 file names from `/usr/bin`.
+
+> Hint: Use `echo "Task completed"` with `>>` to append text.
 
 ```bash
 ls -1 /usr/bin | head -n 10 > project/docs/report.txt
