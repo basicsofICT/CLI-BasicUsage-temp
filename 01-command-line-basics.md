@@ -37,6 +37,21 @@ This guide introduces you to essential Linux commands in an Ubuntu environment u
 - [Ubuntu Linux Documentation](https://help.ubuntu.com/)  
   *Official manuals and tutorials from Ubuntu.*
 
+- [Ubuntu Server Guide](https://documentation.ubuntu.com/server/)  
+  *Official Ubuntu Server documentation, including storage, networking, users, and system administration.*
+
+- [Ubuntu Community Help Wiki](https://help.ubuntu.com/community)  
+  *Community-maintained Ubuntu how-to guides for common CLI and system tasks.*
+
+- [Ubuntu Manpage Repository](https://manpages.ubuntu.com/)  
+  *Search Ubuntu manual pages online when you are not in a terminal.*
+
+- [Ubuntu Package Search](https://packages.ubuntu.com/)  
+  *Find which package provides a command and check package versions across Ubuntu releases.*
+
+- [APT User Guide (Ubuntu)](https://help.ubuntu.com/community/AptGet/Howto)  
+  *Practical package management guide for installing, updating, and removing software from CLI.*
+
 - [Linux Command Library](https://linuxcommandlibrary.com/)  
   *Search and browse hundreds of commands with examples.*
 
@@ -54,6 +69,68 @@ This guide introduces you to essential Linux commands in an Ubuntu environment u
 
 - [Explainshell](https://explainshell.com/)
   *Break down a Linux command and understand each option quickly.*
+
+Quick Ubuntu doc workflow:
+
+1. Use `man <command>` first in your terminal.
+2. If you need Ubuntu-specific behavior, check the Ubuntu docs links above.
+3. If a command is missing, use Ubuntu Package Search to find which package provides it.
+
+### 🧭 Ubuntu 24.04 Quick Tips (Codespaces-Friendly)
+
+Use these commands often when working in Ubuntu 24.04:
+
+```bash
+lsb_release -a              # Confirm Ubuntu release details
+cat /etc/os-release         # Show distro metadata
+```
+
+```bash
+sudo apt update             # Refresh package index
+sudo apt install <package>  # Install a package
+apt list --installed | head # Preview installed packages
+```
+
+```bash
+command -v <command>        # Check if a command exists
+dpkg -S /usr/bin/ls         # Find which package owns a binary/file
+apt-cache search <keyword>  # Search package names/descriptions
+```
+
+```bash
+ip -br a                    # Quick network interface summary
+ss -tuln                    # Show listening TCP/UDP ports
+curl -I https://ubuntu.com  # Test outbound network access
+```
+
+```bash
+df -h                       # Disk usage by filesystem
+du -sh *                    # Folder sizes in current directory
+```
+
+Codespaces note:
+
+- In containerized environments, `systemctl` may be unavailable. If so, run tools directly and inspect processes with `ps aux`.
+
+### 🧪 Mini Exercise: Ubuntu 24.04 Troubleshooting
+
+Complete these 5 tasks in your terminal:
+
+1. Confirm your distro and release, then save output to `ubuntu_version.txt`.
+2. Check whether `curl` and `wget` are installed, then save results to `command_check.txt`.
+3. List listening ports and save the output to `listening_ports.txt`.
+4. Save a summary of disk usage and current folder sizes to `storage_report.txt`.
+5. Search for a package related to `net-tools` and save top 10 lines to `package_search.txt`.
+
+Example solution pattern:
+
+```bash
+lsb_release -a > ubuntu_version.txt
+command -v curl wget > command_check.txt
+ss -tuln > listening_ports.txt
+{ df -h; du -sh *; } > storage_report.txt
+apt-cache search net-tools | head -n 10 > package_search.txt
+```
 
 ---
 

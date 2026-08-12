@@ -213,3 +213,32 @@ tar -czf project_backup.tar.gz project
 mkdir -p project_restore
 tar -xzf project_backup.tar.gz -C project_restore
 ```
+
+### 16.6 Submission checklist for extended practice
+
+Before running Task 14 again, quickly verify extended outputs:
+
+```bash
+ls -l project/docs/shell_files.txt
+ls -l project/docs/report_unique.txt
+ls -l project/docs/hello_stats.txt
+ls -l project/docs/cli_lines.txt
+ls -l project_backup.tar.gz
+ls -ld project_restore/project
+```
+
+If you also completed the Ubuntu 24.04 mini exercise from [01-command-line-basics.md](01-command-line-basics.md), verify these files too:
+
+```bash
+ls -l ubuntu_version.txt
+ls -l command_check.txt
+ls -l listening_ports.txt
+ls -l storage_report.txt
+ls -l package_search.txt
+```
+
+### 16.7 One-line pass/fail check (missing files report)
+
+```bash
+for f in project/docs/shell_files.txt project/docs/report_unique.txt project/docs/hello_stats.txt project/docs/cli_lines.txt project_backup.tar.gz project_restore/project ubuntu_version.txt command_check.txt listening_ports.txt storage_report.txt package_search.txt; do [ -e "$f" ] && echo "PASS $f" || echo "MISSING $f"; done
+```
