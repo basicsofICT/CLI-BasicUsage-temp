@@ -46,6 +46,15 @@ This guide introduces you to essential Linux commands in an Ubuntu environment u
 - [Linux Handbook](https://linuxhandbook.com/)  
   *Step-by-step tutorials, tips, and news for Linux learners.*
 
+- [GNU Coreutils Manual](https://www.gnu.org/software/coreutils/manual/coreutils.html)
+  *Official reference for commands like ls, cp, mv, rm, cat, sort, and more.*
+
+- [Bash Reference Manual](https://www.gnu.org/software/bash/manual/bash.html)
+  *Official Bash shell documentation for scripting and shell behavior.*
+
+- [Explainshell](https://explainshell.com/)
+  *Break down a Linux command and understand each option quickly.*
+
 ---
 
 ### 💻 Free Online Linux Emulators
@@ -318,7 +327,72 @@ ls -l
 
 ---
 
-## 15. 🔐 File Permissions and Ownership
+## 15. 🔎 Searching and Filtering Text
+
+Learn how to quickly locate text inside files:
+
+```bash
+grep "Linux" hello.txt                 # Case-sensitive match
+grep -i "linux" hello.txt              # Case-insensitive match
+grep -n "Linux" hello.txt              # Show line numbers
+grep -R "TODO" .                       # Recursive search in current directory
+```
+
+---
+
+## 16. 🧰 Working with Archives
+
+Compress and extract folders with tar:
+
+```bash
+tar -czf backup.tar.gz project/         # Create compressed archive
+tar -xzf backup.tar.gz                  # Extract archive in current directory
+tar -tzf backup.tar.gz                  # List archive contents
+```
+
+---
+
+## 17. 📊 Sorting, Uniqueness, and Counting
+
+Process and summarize command output:
+
+```bash
+sort names.txt                          # Sort lines alphabetically
+uniq names.txt                          # Remove consecutive duplicates
+sort names.txt | uniq                   # Sort first, then remove duplicates
+wc -l names.txt                         # Count lines
+wc -w names.txt                         # Count words
+```
+
+---
+
+## 18. 🧪 Practice Drills (Heavier Workload)
+
+Try these mini-challenges in order:
+
+1. Create a folder named practice with subfolders a, b, and c.
+2. Create 5 text files in practice/a using touch.
+3. Move 2 files from practice/a into practice/b.
+4. Copy all .txt files from practice/b into practice/c.
+5. Save a long listing of practice into practice/listing.txt.
+6. Save only .txt file names from practice recursively into practice/txt_files.txt.
+7. Count how many .txt files exist under practice and save the number to practice/count.txt.
+8. Compress the practice folder into practice.tar.gz and then extract it into practice_restore.
+
+Example command hints:
+
+```bash
+mkdir -p practice/{a,b,c}
+touch practice/a/file{1..5}.txt
+find practice -type f -name "*.txt"
+find practice -type f -name "*.txt" | wc -l
+tar -czf practice.tar.gz practice
+tar -xzf practice.tar.gz -C practice_restore
+```
+
+---
+
+## 19. 🔐 File Permissions and Ownership
 
 Every file has an owner, a group, and permission settings:
 
@@ -371,7 +445,7 @@ ls -l report.txt
 ---
 
 
-## 16. 🧪 Practice Challenge
+## 20. 🧪 Practice Challenge
 
 Try to complete these tasks using what you’ve learned: (No Submission required)
 
@@ -396,5 +470,8 @@ You’ve now learned how to:
 * Use `nano` for editing text files
 * Understand permissions and change file ownership
 * Explore the Linux file system hierarchy
+* Search and filter text efficiently with `grep`
+* Create and extract archives with `tar`
+* Sort, deduplicate, and count output data
 
 Practice daily to become confident using the Linux terminal! 🚀

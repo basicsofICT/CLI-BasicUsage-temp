@@ -1,9 +1,20 @@
 #!/usr/bin/env bash
-# check.sh — Grades 14 CLI tasks (1 point each)
+# check.sh — Grades core tasks plus extended optional tasks (1 point each check)
 
 score=0
+core_score=0
+extended_score=0
+phase="core"
 
-ok() { echo "✅ $1"; score=$((score+1)); }
+ok() {
+  echo "✅ $1"
+  score=$((score+1))
+  if [ "$phase" = "core" ]; then
+    core_score=$((core_score+1))
+  else
+    extended_score=$((extended_score+1))
+  fi
+}
 bad() { echo "❌ $1"; }
 
 # -- Task 1: project/src and project/docs exist
@@ -157,6 +168,78 @@ else
   bad "Task 13: project/docs/date_help.txt missing"
 fi
 
-echo "Score: $score/13"
+phase="extended"
+
+# -- Task 16.1: shell_files.txt includes discovered .sh files under project
+if [ -f "project/docs/shell_files.txt" ]; then
+  has_hello="$(grep -Fx "project/src/hello.sh" project/docs/shell_files.txt >/dev/null 2>&1; echo $?)"
+  all_valid=1
+  while IFS= read -r path; do
+    [ -z "$path" ] && continue
+    case "$path" in
+      *.sh) ;;
+      *) all_valid=0; break ;;
+    esac
+    [ -f "$path" ] || { all_valid=0; break; }
+  done < project/docs/shell_files.txt
+
+  if [ "$all_valid" -eq 1 ] && [ "$has_hello" -eq 0 ]; then
+    ok "Task 16.1: shell_files.txt correctly lists .sh files"
+  else
+    bad "Task 16.1: shell_files.txt invalid (must include project/src/hello.sh and only existing .sh files)"
+  fi
+else
+  bad "Task 16.1: project/docs/shell_files.txt missing"
+fi
+
+# -- Task 16.2: report_unique.txt equals sorted unique report.txt
+if [ -f "project/docs/report.txt" ] && [ -f "project/docs/report_unique.txt" ]; then
+  if diff -u <(sort project/docs/report.txt | uniq) project/docs/report_unique.txt >/dev/null 2>&1; then
+    ok "Task 16.2: report_unique.txt matches sorted unique report.txt"
+  else
+    bad "Task 16.2: report_unique.txt does not match sorted unique report.txt"
+  fi
+else
+  bad "Task 16.2: project/docs/report.txt or project/docs/report_unique.txt missing"
+fi
+
+# -- Task 16.3: hello_stats.txt equals wc output for hello.txt
+if [ -f "project/src/hello.txt" ] && [ -f "project/docs/hello_stats.txt" ]; then
+  expected16_3="$(wc project/src/hello.txt | tr -s '[:space:]' ' ' | sed -e 's/^ //' -e 's/ $//')"
+  got16_3="$(tr -s '[:space:]' ' ' < project/docs/hello_stats.txt | sed -e 's/^ //' -e 's/ $//')"
+  if [ "$got16_3" = "$expected16_3" ]; then
+    ok "Task 16.3: hello_stats.txt matches wc output"
+  else
+    bad "Task 16.3: hello_stats.txt does not match wc output"
+  fi
+else
+  bad "Task 16.3: project/src/hello.txt or project/docs/hello_stats.txt missing"
+fi
+
+# -- Task 16.4: cli_lines.txt equals grep -i output for CLI in hello.txt
+if [ -f "project/src/hello.txt" ] && [ -f "project/docs/cli_lines.txt" ]; then
+  if diff -u <(grep -i "CLI" project/src/hello.txt) project/docs/cli_lines.txt >/dev/null 2>&1; then
+    ok "Task 16.4: cli_lines.txt matches grep -i output"
+  else
+    bad "Task 16.4: cli_lines.txt does not match grep -i output"
+  fi
+else
+  bad "Task 16.4: project/src/hello.txt or project/docs/cli_lines.txt missing"
+fi
+
+# -- Task 16.5: archive created and extracted to project_restore/project
+if [ -f "project_backup.tar.gz" ] && [ -d "project_restore/project" ]; then
+  if [ -d "project_restore/project/src" ] && [ -d "project_restore/project/docs" ]; then
+    ok "Task 16.5: archive exists and project restored successfully"
+  else
+    bad "Task 16.5: extracted project structure is incomplete"
+  fi
+else
+  bad "Task 16.5: project_backup.tar.gz or project_restore/project missing"
+fi
+
+echo "Core Score: $core_score/13"
+echo "Extended Score: $extended_score/5"
+echo "Total Score: $score/18"
 
 exit 0

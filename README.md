@@ -1,25 +1,40 @@
 # 🐧 Linux CLI Practical Task (15 Points)
 
-- Work **in a GitHub Codespace**. This repo is pinned to **Ubuntu 24.04 (Noble)** so everyone uses the same environment.
+- Start by **forking this repository** to your own GitHub account.
+
+- **GitHub Classroom is not required** for this assignment.
+
+- Work **in a GitHub Codespace created from your fork**. This repo is pinned to **Ubuntu 24.04 (Noble)** so everyone uses the same environment.
 
 - First study [Command Line Basics](01-command-line-basics.md) properly. I recommend completing all the tasks from the learning materials in the same environment to become familiar with the command line before attempting the practical exercises below.
 
-- Follow each section in order (Not necessary but there are some tasks which you might need to do in order)
+- Follow each section in order. (This is not strictly required, but some tasks are easier if done in sequence.)
 
 - You can check your score yourself. You will earn 13 points from the tasks, plus 2 points for running the score-checking script and pushing your changes to your repository.
+
+- To make the workload heavier, complete the optional extended tasks at the end after Task 15.
 
 - Remember to frequently commit and push the changes [15. 🚀 Commit and push](#15--commit-and-push)
 
 ---
 
-***Do not edit check.sh or .github/classroom/autograding.json.***
+***Do not edit or modify check.sh file.***
+
+## Before You Begin
+
+1. Fork this repository to your GitHub account.
+2. Open your **forked repository** on GitHub.
+3. Create a new Codespace from the fork.
+4. Complete all tasks inside that Codespace.
+
+Use only your fork for all work and submissions.
 
 ***Good luck 🚀***
+
 ## 1. Create the project folders
 
 ```bash
-# Make main project folder with two sub-folders: src & docs
-# project/src project/docs
+mkdir -p project/src project/docs
 ```
 
 ---
@@ -35,7 +50,7 @@ chmod +x project/src/hello.sh
 
 ---
 
-##  3. Create readme.txt inside project/src (Use Nano text editor)
+## 3. Create readme.txt inside project/src (Use Nano text editor)
 
 ```bash
 Type any three (or more) lines in the file, e.g.:
@@ -49,20 +64,20 @@ Line 3
 ## 4. Move `readme.txt` to `project/docs`
 
 ```bash
-Move the readme.txt file from its current location to project/docs folder
+mv project/src/readme.txt project/docs/
 ```
 ---
 
 ## 5. Build report.txt
 
-In the project/docs folder create a file named report.txt using redirect. 
+In the project/docs folder, create a file named report.txt using redirection.
 
-> Hint: Use ls -l and head command to get the first 10 file names from ```/usr/bin ls -1 /usr/bin | head -n 10``` 
+> Hint: Use the `ls -1 /usr/bin | head -n 10` command to get the first 10 file names from `/usr/bin`.
 
 ```bash
-Write the first 10 filenames from /usr/bin
+ls -1 /usr/bin | head -n 10 > project/docs/report.txt
 
-Append the text: Task completed
+echo "Task completed" >> project/docs/report.txt
 
 ```
 
@@ -70,17 +85,25 @@ Append the text: Task completed
 
 ## 6. Back up the `src` folder to `src_backup`
 ```bash
-In the project folder, create a new folder called src_backup and use cp command to create the copy of the src folder
+mkdir -p project/src_backup
+cp -r project/src project/src_backup/
 ```
 
 ---
 
 ## 7. Remove any `project/bin` folder if it exists
 
+```bash
+rm -rf project/bin
+```
 
 ---
 
 ## 8. Create a hidden file `.secret` in `project/` folder.
+
+```bash
+touch project/.secret
+```
 
 
 ---
@@ -108,16 +131,16 @@ grep -o 'Linux' project/src/hello.txt | wc -l > project/docs/linux_count.txt
 
 ---
 
-## 12. Pipes: save first 5 lines of `/etc` long listing into a file project/docs/etc_head.txt
+## 12. Pipes: save the first 5 lines of the `/etc` long listing into project/docs/etc_head.txt
 ```bash
-# hint use ls-l and head with pipe and then redirect
+ls -l /etc | head -n 5 > project/docs/etc_head.txt
 ```
 
 ---
 
-## 13.  Help output: capture first line of `date --help`
+## 13. Help output: capture the first line of `date --help`
 ```bash
-# similar approach to 12 but use help command for the help output & redirect
+date --help | head -n 1 > project/docs/date_help.txt
 ```
 
 ---
@@ -126,17 +149,25 @@ grep -o 'Linux' project/src/hello.txt | wc -l > project/docs/linux_count.txt
 ```bash
 .github/classroom/check.sh > result.txt
 
-# After you have run the above command, you can check your score by typing 
+# After you run the above command, check your score by typing:
 
 cat result.txt 
 
 ```
 
->> Note 
+Expected score lines in `result.txt`:
 
-- If you’re not satisfied with your score, you may correct any mistakes you’ve made. You can try as many times as you like before the deadline. The score you have at the deadline will be your final score. I will check it from your repository and post it in Canvas. 
-- After making the corrections, **re-run Task 14** again and check your score. 
-- **Always remember to commit and push the changes you have made by doing the Task no. 15 before closing the GitHub Codespace. You need to do this frequently that is every time you work on the tasks, remember to commit and push**
+```text
+Core Score: <value>/13
+Extended Score: <value>/5
+Total Score: <value>/18
+```
+
+>> Note
+
+- If you’re not satisfied with your score, you may correct any mistakes you’ve made. You can try as many times as you like before the deadline. The score you have at the deadline will be your final score. I will check it from your repository and post it in Canvas.
+- After making corrections, **re-run Task 14** and check your score.
+- **Always remember to commit and push the changes you have made by doing Task 15 before closing the GitHub Codespace on your fork. You need to do this frequently every time you work on the tasks.**
 
 
 ## 15. 🚀 Commit and push
@@ -144,4 +175,39 @@ cat result.txt
 git add .
 git commit -m "Complete 15 CLI tasks"
 git push
+```
+
+---
+
+## 16. Optional Extended Workload (Not part of the 15-point score)
+
+Complete the following extra tasks to deepen your CLI skills. These are recommended for extra practice.
+
+The `check.sh` script now also reports these extended checks separately as an extended score.
+
+### 16.1 Search recursively for shell scripts
+```bash
+find project -type f -name "*.sh" > project/docs/shell_files.txt
+```
+
+### 16.2 Sort and deduplicate output
+```bash
+cat project/docs/report.txt | sort | uniq > project/docs/report_unique.txt
+```
+
+### 16.3 Count lines, words, and bytes in hello.txt
+```bash
+wc project/src/hello.txt > project/docs/hello_stats.txt
+```
+
+### 16.4 Extract only lines containing CLI from hello.txt
+```bash
+grep -i "CLI" project/src/hello.txt > project/docs/cli_lines.txt
+```
+
+### 16.5 Create and extract a tar archive
+```bash
+tar -czf project_backup.tar.gz project
+mkdir -p project_restore
+tar -xzf project_backup.tar.gz -C project_restore
 ```
