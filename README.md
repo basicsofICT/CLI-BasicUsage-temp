@@ -50,80 +50,104 @@ cp project/src/readme.txt project/docs/
 
 ## 5. Build report.txt
 
-In the project/docs folder, create a file named report.txt using redirection.
+In the `project/docs` folder, create a file named `report.txt` that contains exactly 11 lines: the first 10 lines must be real file names that exist in `/usr/bin`, and the last line must read exactly `Task completed`.
 
-> Hint: Use the `ls -1 /usr/bin | head -n 10` command to get the first 10 file names from `/usr/bin`.
+> Hint: List the contents of `/usr/bin` and limit the output to only the first 10 entries.
+>
+> Example: `ls /etc | head -n 5` prints only the first 5 lines from a listing of `/etc`. Adapt this idea to the right folder and line count for this task.
 
-> Hint: Use `echo "Task completed"` with `>>` to append text.
+> Hint: Redirect (`>`) that limited output into `project/docs/report.txt` to create the file.
 
-```bash
-ls -1 /usr/bin | head -n 10 > project/docs/report.txt
-
-echo "Task completed" >> project/docs/report.txt
-
-```
+> Hint: Append (`>>`, not `>`) the text `Task completed` as a new line at the end of the same file, so you don't overwrite what you already saved.
 
 ---
 
 ## 6. Back up the `src` folder to `src_backup`
-```bash
-mkdir -p project/src_backup
-cp -r project/src project/src_backup/
-```
+
+> Hint: Do **not** create the `project/src_backup` folder yourself beforehand. Let the copy command create it for you as a mirror of `project/src`. If a destination folder already exists, a recursive copy will nest the source *inside* it instead of matching its contents directly.
+
+> Hint: Use the recursive copy option so the entire folder tree (not just one file) gets copied.
+
+> Example: `cp -r folderA folderB` when `folderB` does not already exist. This creates `folderB` as an exact copy of everything inside `folderA`.
 
 ---
 
 ## 7. Remove any `project/bin` folder if it exists
 
-```bash
-rm -rf project/bin
-```
+> Hint: Use the remove command with options that delete a folder and its contents recursively, and that won't error out if the folder doesn't exist.
+
+> Example: `rm -rf some_folder` deletes `some_folder` and everything inside it without asking for confirmation.
 
 ---
 
 ## 8. Create a hidden file `.secret` in `project/` folder.
 
-```bash
-touch project/.secret
-```
+> Hint: In Linux, files and folders whose name starts with a dot (`.`) are hidden.
+
+> Hint: Use the command that creates an empty file (or updates its timestamp if it already exists).
+
+> Example: `touch .env` creates an empty hidden file named `.env` in the current folder.
 
 
 ---
 
 ## 9. Record permissions of `hello.sh` into `mode.txt`
-```bash
-stat -c "%a" project/src/hello.sh > project/docs/mode.txt
-```
+
+> Hint: Use `stat` with a format option so it prints only the numeric permission mode, not the full file listing.
+
+> Hint: Redirect (`>`) that output into `project/docs/mode.txt`.
+
+> Example: `stat -c "%a" somefile.txt` prints just the numeric permissions (e.g. `644`) of `somefile.txt`.
 
 ---
 
 ## 10. Wildcards: create sample files and list matches to `wild.txt`
-```bash
-touch project/src/a1.txt project/src/a2.txt project/src/b1.log project/src/ab.txt
-ls project/src/a*.txt > project/docs/wild.txt
-```
+
+Create four empty sample files inside `project/src`: `a1.txt`, `a2.txt`, `ab.txt`, and `b1.log`.
+
+> Hint: `touch` can create several files at once if you list multiple names after it.
+
+Then, using a wildcard pattern, list only the files in `project/src` that start with `a` and end in `.txt` — this should match `a1.txt`, `a2.txt`, and `ab.txt`, but must **not** match `b1.log`. Redirect that list into `project/docs/wild.txt`.
+
+> Hint: The `*` wildcard matches any sequence of characters, so `a*.txt` matches any name starting with `a` and ending in `.txt`.
+
+> Hint: Redirect (`>`) the matched list into `project/docs/wild.txt`.
+
+> Example: `ls *.log` lists every file in the current folder that ends in `.log`.
 
 ---
 
 ## 11. Download a text file and count exact “Linux” occurrences
-```bash
-wget -q -O project/src/hello.txt https://raw.githubusercontent.com/dipaish/cimages/main/hello.txt
-grep -o 'Linux' project/src/hello.txt | wc -l > project/docs/linux_count.txt
-```
+
+Download this file: `https://raw.githubusercontent.com/dipaish/cimages/main/hello.txt`, and save it as `project/src/hello.txt`.
+
+> Hint: `wget` can fetch a file from a URL. Use its output option to control both the file name and the folder it's saved to, so it ends up at `project/src/hello.txt` instead of the current folder.
+
+> Example: `wget -O somefolder/newname.txt https://example.com/somefile.txt` downloads `somefile.txt` and saves it as `somefolder/newname.txt`.
+
+Then count how many times the exact word "Linux" appears inside `project/src/hello.txt`, and save that number in `project/docs/linux_count.txt`.
+
+> Hint: `grep -o` prints each match on its own line instead of the whole line it was found in, piping that into `wc -l` turns "how many matches" into "how many lines", which is your count.
+
+> Hint: Redirect (`>`) the final count into `project/docs/linux_count.txt`.
+
+> Example: `grep -o 'cat' file.txt | wc -l` counts how many times "cat" appears in `file.txt`.
 
 ---
 
 ## 12. Pipes: save the first 5 lines of the `/etc` long listing into project/docs/etc_head.txt
-```bash
-ls -l /etc | head -n 5 > project/docs/etc_head.txt
-```
+
+> Hint: Combine the long-listing command with `head` using a pipe (`|`) to keep only a limited number of lines.
+
+> Example: `ls -l /usr | head -n 3` shows a long listing of just the first 3 entries in `/usr`. Adjust the folder and line count for this task.
 
 ---
 
 ## 13. Help output: capture the first line of `date --help`
-```bash
-date --help | head -n 1 > project/docs/date_help.txt
-```
+
+> Hint: Pipe a command's `--help` output into `head` to keep only its first line.
+
+> Example: `ls --help | head -n 1` prints just the first line of `ls`'s help text.
 
 ---
 
