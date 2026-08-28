@@ -11,17 +11,6 @@
 
 ***Do not edit or modify check.sh file.***
 
-## Before You Begin
-
-1. Fork this repository to your GitHub account.
-2. Open your **forked repository** on GitHub.
-3. Create a new Codespace from the fork.
-4. Complete all tasks inside that Codespace.
-
-Use only your fork for all work and submissions.
-
-***Good luck 🚀***
-
 ## 1. Create the project folders
 
 ```bash
