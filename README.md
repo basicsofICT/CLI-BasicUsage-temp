@@ -129,6 +129,9 @@ date --help | head -n 1 > project/docs/date_help.txt
 
 ## 14. Run the check.sh script and know your score
 ```bash
+# If you get a "Permission denied" error, make the script executable first:
+chmod +x .github/classroom/check.sh
+
 .github/classroom/check.sh > result.txt
 
 # After you run the above command, check your score by typing:
