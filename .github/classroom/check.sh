@@ -1,21 +1,18 @@
 #!/usr/bin/env bash
-# check.sh — Grades core tasks plus extended optional tasks (1 point each check)
+# check.sh — Grades 13 core tasks + commit/push check (2 pts) = 15 total. Extended tasks are pass/fail only, not scored.
 
-score=0
 core_score=0
-extended_score=0
-phase="core"
+commit_score=0
 
 ok() {
   echo "✅ $1"
-  score=$((score+1))
-  if [ "$phase" = "core" ]; then
-    core_score=$((core_score+1))
-  else
-    extended_score=$((extended_score+1))
-  fi
+  core_score=$((core_score+1))
 }
 bad() { echo "❌ $1"; }
+
+# Extended (optional) tasks use these instead of ok/bad, since they are not scored
+note_ok() { echo "✅ $1"; }
+note_bad() { echo "❌ $1"; }
 
 # -- Task 1: project/src and project/docs exist
 if [ -d "project/src" ] && [ -d "project/docs" ]; then
@@ -168,7 +165,33 @@ else
   bad "Task 13: project/docs/date_help.txt missing"
 fi
 
-phase="extended"
+# -- Commit check: task files inside project/ have no uncommitted changes
+branch=""
+if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  if [ -z "$(git status --porcelain -- project 2>/dev/null)" ]; then
+    ok "Commit check: all changes inside project/ are committed"
+    commit_score=$((commit_score+1))
+  else
+    bad "Commit check: you have uncommitted changes inside project/ (run git add && git commit)"
+  fi
+
+  # -- Push check: local commits exist on the remote branch
+  branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
+  git fetch origin "$branch" >/dev/null 2>&1
+  ahead="$(git rev-list --count "origin/$branch..HEAD" 2>/dev/null)"
+  if [ "$ahead" = "0" ]; then
+    ok "Push check: local commits are pushed to origin/$branch"
+    commit_score=$((commit_score+1))
+  else
+    bad "Push check: you have unpushed commits (run git push)"
+  fi
+else
+  bad "Commit check: not inside a git repository"
+  bad "Push check: not inside a git repository"
+fi
+
+echo "---"
+echo "Optional/Extended tasks below are for practice only and do NOT affect your score:"
 
 # -- Task 16.1: shell_files.txt includes discovered .sh files under project
 if [ -f "project/docs/shell_files.txt" ]; then
@@ -184,23 +207,23 @@ if [ -f "project/docs/shell_files.txt" ]; then
   done < project/docs/shell_files.txt
 
   if [ "$all_valid" -eq 1 ] && [ "$has_hello" -eq 0 ]; then
-    ok "Task 16.1: shell_files.txt correctly lists .sh files"
+    note_ok "Task 16.1: shell_files.txt correctly lists .sh files"
   else
-    bad "Task 16.1: shell_files.txt invalid (must include project/src/hello.sh and only existing .sh files)"
+    note_bad "Task 16.1: shell_files.txt invalid (must include project/src/hello.sh and only existing .sh files)"
   fi
 else
-  bad "Task 16.1: project/docs/shell_files.txt missing"
+  note_bad "Task 16.1: project/docs/shell_files.txt missing"
 fi
 
 # -- Task 16.2: report_unique.txt equals sorted unique report.txt
 if [ -f "project/docs/report.txt" ] && [ -f "project/docs/report_unique.txt" ]; then
   if diff -u <(sort project/docs/report.txt | uniq) project/docs/report_unique.txt >/dev/null 2>&1; then
-    ok "Task 16.2: report_unique.txt matches sorted unique report.txt"
+    note_ok "Task 16.2: report_unique.txt matches sorted unique report.txt"
   else
-    bad "Task 16.2: report_unique.txt does not match sorted unique report.txt"
+    note_bad "Task 16.2: report_unique.txt does not match sorted unique report.txt"
   fi
 else
-  bad "Task 16.2: project/docs/report.txt or project/docs/report_unique.txt missing"
+  note_bad "Task 16.2: project/docs/report.txt or project/docs/report_unique.txt missing"
 fi
 
 # -- Task 16.3: hello_stats.txt equals wc output for hello.txt
@@ -208,38 +231,40 @@ if [ -f "project/src/hello.txt" ] && [ -f "project/docs/hello_stats.txt" ]; then
   expected16_3="$(wc project/src/hello.txt | tr -s '[:space:]' ' ' | sed -e 's/^ //' -e 's/ $//')"
   got16_3="$(tr -s '[:space:]' ' ' < project/docs/hello_stats.txt | sed -e 's/^ //' -e 's/ $//')"
   if [ "$got16_3" = "$expected16_3" ]; then
-    ok "Task 16.3: hello_stats.txt matches wc output"
+    note_ok "Task 16.3: hello_stats.txt matches wc output"
   else
-    bad "Task 16.3: hello_stats.txt does not match wc output"
+    note_bad "Task 16.3: hello_stats.txt does not match wc output"
   fi
 else
-  bad "Task 16.3: project/src/hello.txt or project/docs/hello_stats.txt missing"
+  note_bad "Task 16.3: project/src/hello.txt or project/docs/hello_stats.txt missing"
 fi
 
 # -- Task 16.4: cli_lines.txt equals grep -i output for CLI in hello.txt
 if [ -f "project/src/hello.txt" ] && [ -f "project/docs/cli_lines.txt" ]; then
   if diff -u <(grep -i "CLI" project/src/hello.txt) project/docs/cli_lines.txt >/dev/null 2>&1; then
-    ok "Task 16.4: cli_lines.txt matches grep -i output"
+    note_ok "Task 16.4: cli_lines.txt matches grep -i output"
   else
-    bad "Task 16.4: cli_lines.txt does not match grep -i output"
+    note_bad "Task 16.4: cli_lines.txt does not match grep -i output"
   fi
 else
-  bad "Task 16.4: project/src/hello.txt or project/docs/cli_lines.txt missing"
+  note_bad "Task 16.4: project/src/hello.txt or project/docs/cli_lines.txt missing"
 fi
 
 # -- Task 16.5: archive created and extracted to project_restore/project
 if [ -f "project_backup.tar.gz" ] && [ -d "project_restore/project" ]; then
   if [ -d "project_restore/project/src" ] && [ -d "project_restore/project/docs" ]; then
-    ok "Task 16.5: archive exists and project restored successfully"
+    note_ok "Task 16.5: archive exists and project restored successfully"
   else
-    bad "Task 16.5: extracted project structure is incomplete"
+    note_bad "Task 16.5: extracted project structure is incomplete"
   fi
 else
-  bad "Task 16.5: project_backup.tar.gz or project_restore/project missing"
+  note_bad "Task 16.5: project_backup.tar.gz or project_restore/project missing"
 fi
 
+echo "---"
 echo "Core Score: $core_score/13"
-echo "Extended Score: $extended_score/5"
-echo "Total Score: $score/18"
+echo "Commit/Push Score: $commit_score/2"
+total=$((core_score+commit_score))
+echo "Total Score: $total/15"
 
 exit 0
